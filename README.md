@@ -35,6 +35,7 @@ A API estará disponível em `http://localhost:8080`. O console do H2 fica em
 | `DELETE` | `/api/v1/entidades/{id}` | Remove uma entidade |
 | CRUD | `/api/v1/usuarios` | Gerencia usuários e seus endereços |
 | CRUD | `/api/v1/animais` | Gerencia animais vinculados a entidades |
+| CRUD | `/api/v1/adocoes` | Gerencia adoções entre usuários e animais |
 
 Exemplo de corpo para criação e atualização:
 

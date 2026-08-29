@@ -1,7 +1,7 @@
 package br.edu.unisinos.apirest.usuario;
-import org.junit.jupiter.api.*; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.boot.test.context.SpringBootTest; import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc; import org.springframework.http.MediaType; import org.springframework.test.web.servlet.MockMvc;
+import org.junit.jupiter.api.*; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.boot.test.context.SpringBootTest; import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc; import org.springframework.http.MediaType; import org.springframework.test.annotation.DirtiesContext; import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*; import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-@SpringBootTest @AutoConfigureMockMvc class TesteControladorUsuario {
+@SpringBootTest @AutoConfigureMockMvc @DirtiesContext(classMode=DirtiesContext.ClassMode.AFTER_CLASS) class TesteControladorUsuario {
     @Autowired MockMvc mvc; @Autowired RepositorioUsuario repository; @BeforeEach void clean(){ repository.deleteAll(); }
     @Test void shouldCreateWithoutExposingPassword() throws Exception {
         mvc.perform(post("/api/v1/usuarios").contentType(MediaType.APPLICATION_JSON).content("""
