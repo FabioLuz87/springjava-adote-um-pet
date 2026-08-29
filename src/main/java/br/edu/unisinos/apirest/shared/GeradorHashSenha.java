@@ -16,12 +16,18 @@ public class GeradorHashSenha {
     public String hash(String senha) {
         byte[] salt = new byte[16];
         random.nextBytes(salt);
+        PBEKeySpec spec = new PBEKeySpec(senha.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
         try {
-            PBEKeySpec spec = new PBEKeySpec(senha.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
-            byte[] hash = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
-            return ITERATIONS + ":" + Base64.getEncoder().encodeToString(salt) + ":" + Base64.getEncoder().encodeToString(hash);
+            byte[] hash = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+                    .generateSecret(spec)
+                    .getEncoded();
+            return ITERATIONS
+                    + ":" + Base64.getEncoder().encodeToString(salt)
+                    + ":" + Base64.getEncoder().encodeToString(hash);
         } catch (GeneralSecurityException exception) {
             throw new IllegalStateException("Não foi possível proteger a senha.", exception);
+        } finally {
+            spec.clearPassword();
         }
     }
 }

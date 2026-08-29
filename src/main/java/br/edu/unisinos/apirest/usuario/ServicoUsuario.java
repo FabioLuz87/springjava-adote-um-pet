@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ServicoUsuario {
     private final RepositorioUsuario repository;
-    private final GeradorHashSenha hashSenhaer;
+    private final GeradorHashSenha geradorHashSenha;
 
-    public ServicoUsuario(RepositorioUsuario repository, GeradorHashSenha hashSenhaer) {
+    public ServicoUsuario(RepositorioUsuario repository, GeradorHashSenha geradorHashSenha) {
         this.repository = repository;
-        this.hashSenhaer = hashSenhaer;
+        this.geradorHashSenha = geradorHashSenha;
     }
 
     @Transactional(readOnly = true)
@@ -34,14 +34,16 @@ public class ServicoUsuario {
         if (request.senha() == null || request.senha().isBlank()) {
             throw new IllegalArgumentException("Senha é obrigatória.");
         }
-        return RespostaUsuario.from(repository.save(new Usuario(request, hashSenhaer.hash(request.senha()))));
+        return RespostaUsuario.from(repository.save(new Usuario(request, geradorHashSenha.hash(request.senha()))));
     }
 
     @Transactional
     public RespostaUsuario update(Long id, RequisicaoUsuario request) {
         Usuario value = get(id);
         validateUnique(request, id);
-        String hash = request.senha() == null || request.senha().isBlank() ? null : hashSenhaer.hash(request.senha());
+        String hash = request.senha() == null || request.senha().isBlank()
+                ? null
+                : geradorHashSenha.hash(request.senha());
         value.update(request, hash);
         return RespostaUsuario.from(value);
     }
@@ -57,8 +59,12 @@ public class ServicoUsuario {
     }
 
     private void validateUnique(RequisicaoUsuario request, Long id) {
-        boolean cpfExists = id == null ? repository.existsByCpf(request.cpf()) : repository.existsByCpfAndIdNot(request.cpf(), id);
-        boolean emailExists = id == null ? repository.existsByEmailIgnoreCase(request.email()) : repository.existsByEmailIgnoreCaseAndIdNot(request.email(), id);
+        boolean cpfExists = id == null
+                ? repository.existsByCpf(request.cpf())
+                : repository.existsByCpfAndIdNot(request.cpf(), id);
+        boolean emailExists = id == null
+                ? repository.existsByEmailIgnoreCase(request.email())
+                : repository.existsByEmailIgnoreCaseAndIdNot(request.email(), id);
         if (cpfExists) {
             throw new ExcecaoConflito("CPF já cadastrado.");
         }
