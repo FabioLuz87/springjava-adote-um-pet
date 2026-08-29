@@ -1,4 +1,4 @@
-package br.edu.unisinos.apirest.entidade;
+package br.edu.unisinos.apirest.usuario;
 
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -15,35 +15,35 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/api/v1/entidades")
-public class ControladorEntidade {
-    private final ServicoEntidade service;
+@RequestMapping("/api/v1/usuarios")
+public class ControladorUsuario {
+    private final ServicoUsuario service;
 
-    public ControladorEntidade(ServicoEntidade service) {
+    public ControladorUsuario(ServicoUsuario service) {
         this.service = service;
     }
 
     @GetMapping
-    public Page<RespostaEntidade> findAll(Pageable pageable) {
+    public Page<RespostaUsuario> findAll(Pageable pageable) {
         return service.findAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public RespostaEntidade findById(@PathVariable Long id) {
+    public RespostaUsuario findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<RespostaEntidade> create(@Valid @RequestBody RequisicaoEntidade request,
-                                                    UriComponentsBuilder uriBuilder) {
-        RespostaEntidade response = service.create(request);
-        return ResponseEntity.created(uriBuilder.path("/api/v1/entidades/{id}")
+    public ResponseEntity<RespostaUsuario> create(@Valid @RequestBody RequisicaoUsuario request,
+                                                   UriComponentsBuilder uri) {
+        RespostaUsuario response = service.create(request);
+        return ResponseEntity.created(uri.path("/api/v1/usuarios/{id}")
                 .buildAndExpand(response.id())
                 .toUri()).body(response);
     }
 
     @PutMapping("/{id}")
-    public RespostaEntidade update(@PathVariable Long id, @Valid @RequestBody RequisicaoEntidade request) {
+    public RespostaUsuario update(@PathVariable Long id, @Valid @RequestBody RequisicaoUsuario request) {
         return service.update(id, request);
     }
 

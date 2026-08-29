@@ -1,13 +1,12 @@
 package br.edu.unisinos.apirest.shared;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ManipuladorExcecoesApi {
@@ -37,6 +36,11 @@ public class ManipuladorExcecoesApi {
                 ));
         detail.setProperty("fields", fields);
         return detail;
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    ProblemDetail handleIllegalArgument(IllegalArgumentException exception) {
+        return problem(HttpStatus.BAD_REQUEST, "Dados inválidos", exception.getMessage());
     }
 
     private ProblemDetail problem(HttpStatus status, String title, String detail) {

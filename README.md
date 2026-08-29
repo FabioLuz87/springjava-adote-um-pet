@@ -33,6 +33,7 @@ A API estará disponível em `http://localhost:8080`. O console do H2 fica em
 | `POST` | `/api/v1/entidades` | Cria uma entidade |
 | `PUT` | `/api/v1/entidades/{id}` | Atualiza uma entidade |
 | `DELETE` | `/api/v1/entidades/{id}` | Remove uma entidade |
+| CRUD | `/api/v1/usuarios` | Gerencia usuários e seus endereços |
 
 Exemplo de corpo para criação e atualização:
 

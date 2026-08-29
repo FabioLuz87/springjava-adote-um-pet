@@ -30,23 +30,53 @@ public class Endereco {
     @Column(nullable = false, length = 9)
     private String cep;
 
-    protected Endereco() {}
+    protected Endereco() {
+    }
 
-    public Endereco(DadosEndereco data) { update(data); }
+    public Endereco(DadosEndereco data) {
+        update(data);
+    }
 
     public void update(DadosEndereco data) {
-        logradouro = data.logradouro(); numero = data.numero(); complemento = data.complemento();
-        bairro = data.bairro(); cidade = data.cidade(); estado = data.estado().toUpperCase();
+        logradouro = data.logradouro();
+        numero = data.numero();
+        complemento = data.complemento();
+        bairro = data.bairro();
+        cidade = data.cidade();
+        estado = data.estado().toUpperCase();
         cep = data.cep();
     }
 
-    public Long getId() { return id; }
-    public String getLogradouro() { return logradouro; }
-    public String getNumero() { return numero; }
-    public String getComplemento() { return complemento; }
-    public String getBairro() { return bairro; }
-    public String getCidade() { return cidade; }
-    public String getEstado() { return estado; }
-    public String getCep() { return cep; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getCep() {
+        return cep;
+    }
 }
 
