@@ -1,6 +1,6 @@
 # API REST com Spring Boot
 
-Chassi de uma API REST em arquitetura MVC, sem autenticação, com uma feature CRUD de produtos.
+API REST em arquitetura MVC para uma plataforma de adoção de animais, sem autenticação nesta etapa.
 
 ## Tecnologias
 
@@ -24,25 +24,36 @@ A API estará disponível em `http://localhost:8080`. O console do H2 fica em
 `http://localhost:8080/h2-console`, usando a URL JDBC
 `jdbc:h2:mem:api-rest`, usuário `sa` e senha vazia.
 
-## Endpoints de produtos
+## Endpoints
 
 | Método | Rota | Resultado |
 |---|---|---|
-| `GET` | `/api/v1/products` | Lista paginada |
-| `GET` | `/api/v1/products/{id}` | Busca por ID |
-| `POST` | `/api/v1/products` | Cria produto |
-| `PUT` | `/api/v1/products/{id}` | Atualiza produto |
-| `DELETE` | `/api/v1/products/{id}` | Remove produto |
+| `GET` | `/api/v1/entidades` | Lista entidades |
+| `GET` | `/api/v1/entidades/{id}` | Busca uma entidade |
+| `POST` | `/api/v1/entidades` | Cria uma entidade |
+| `PUT` | `/api/v1/entidades/{id}` | Atualiza uma entidade |
+| `DELETE` | `/api/v1/entidades/{id}` | Remove uma entidade |
 
 Exemplo de corpo para criação e atualização:
 
 ```json
 {
-  "sku": "NOTE-001",
-  "name": "Notebook",
-  "price": 3999.90
+  "name": "Abrigo Amigo",
+  "type": "ONG",
+  "phone": "51999999999",
+  "email": "contato@abrigo.org",
+  "serviceHours": "Seg-Sex 9h-18h",
+  "address": {
+    "street": "Rua A",
+    "number": "10",
+    "complement": null,
+    "neighborhood": "Centro",
+    "city": "São Leopoldo",
+    "state": "RS",
+    "zipCode": "93000-000"
+  }
 }
 ```
 
 A listagem aceita os parâmetros usuais de paginação, por exemplo:
-`GET /api/v1/products?page=0&size=20&sort=name,asc`.
+`GET /api/v1/entidades?page=0&size=20&sort=name,asc`.
