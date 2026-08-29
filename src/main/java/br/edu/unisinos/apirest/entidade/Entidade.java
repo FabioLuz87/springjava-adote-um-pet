@@ -1,7 +1,6 @@
 package br.edu.unisinos.apirest.entidade;
 
 import br.edu.unisinos.apirest.endereco.Endereco;
-import br.edu.unisinos.apirest.endereco.DadosEndereco;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

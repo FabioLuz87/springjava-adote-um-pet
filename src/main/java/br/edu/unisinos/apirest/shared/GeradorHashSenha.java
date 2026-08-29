@@ -1,12 +1,11 @@
 package br.edu.unisinos.apirest.shared;
 
-import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import org.springframework.stereotype.Component;
 
 @Component
 public class GeradorHashSenha {
