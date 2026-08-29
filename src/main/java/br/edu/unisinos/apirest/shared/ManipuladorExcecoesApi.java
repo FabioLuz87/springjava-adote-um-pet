@@ -39,6 +39,11 @@ public class ManipuladorExcecoesApi {
         return detail;
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    ProblemDetail handleIllegalArgument(IllegalArgumentException exception) {
+        return problem(HttpStatus.BAD_REQUEST, "Dados inválidos", exception.getMessage());
+    }
+
     private ProblemDetail problem(HttpStatus status, String title, String detail) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(status, detail);
         problem.setTitle(title);
