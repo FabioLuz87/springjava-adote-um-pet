@@ -38,22 +38,22 @@ Exemplo de corpo para criação e atualização:
 
 ```json
 {
-  "name": "Abrigo Amigo",
-  "type": "ONG",
-  "phone": "51999999999",
+  "nome": "Abrigo Amigo",
+  "tipo": "ONG",
+  "telefone": "51999999999",
   "email": "contato@abrigo.org",
-  "serviceHours": "Seg-Sex 9h-18h",
-  "address": {
-    "street": "Rua A",
-    "number": "10",
-    "complement": null,
-    "neighborhood": "Centro",
-    "city": "São Leopoldo",
-    "state": "RS",
-    "zipCode": "93000-000"
+  "horarioAtendimento": "Seg-Sex 9h-18h",
+  "endereco": {
+    "logradouro": "Rua A",
+    "numero": "10",
+    "complemento": null,
+    "bairro": "Centro",
+    "cidade": "São Leopoldo",
+    "estado": "RS",
+    "cep": "93000-000"
   }
 }
 ```
 
 A listagem aceita os parâmetros usuais de paginação, por exemplo:
-`GET /api/v1/entidades?page=0&size=20&sort=name,asc`.
+`GET /api/v1/entidades?page=0&size=20&sort=nome,asc`.
