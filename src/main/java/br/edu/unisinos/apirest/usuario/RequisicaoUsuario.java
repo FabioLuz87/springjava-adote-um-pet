@@ -16,5 +16,6 @@ public record RequisicaoUsuario(
         @Size(min = 8, max = 100) String senha,
         @NotBlank @Size(max = 30) String perfil,
         @NotNull @Valid DadosEndereco endereco
-) {}
+) {
+}
 

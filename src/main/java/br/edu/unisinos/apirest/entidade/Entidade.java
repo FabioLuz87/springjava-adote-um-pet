@@ -15,18 +15,25 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "entidades")
 public class Entidade {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 120) private String nome;
-    @Column(nullable = false, length = 50) private String tipo;
-    @Column(nullable = false, length = 20) private String telefone;
-    @Column(nullable = false, unique = true, length = 150) private String email;
-    @Column(nullable = false, length = 150) private String horarioAtendimento;
+    @Column(nullable = false, length = 120)
+    private String nome;
+    @Column(nullable = false, length = 50)
+    private String tipo;
+    @Column(nullable = false, length = 20)
+    private String telefone;
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
+    @Column(nullable = false, length = 150)
+    private String horarioAtendimento;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
     @JoinColumn(name = "id_endereco", nullable = false, unique = true)
     private Endereco endereco;
 
-    protected Entidade() {}
+    protected Entidade() {
+    }
 
     public Entidade(RequisicaoEntidade request) {
         endereco = new Endereco(request.endereco());
@@ -39,16 +46,39 @@ public class Entidade {
     }
 
     private void updateFields(RequisicaoEntidade request) {
-        nome = request.nome(); tipo = request.tipo(); telefone = request.telefone();
-        email = request.email().toLowerCase(); horarioAtendimento = request.horarioAtendimento();
+        nome = request.nome();
+        tipo = request.tipo();
+        telefone = request.telefone();
+        email = request.email().toLowerCase();
+        horarioAtendimento = request.horarioAtendimento();
     }
 
-    public Long getId() { return id; }
-    public String getNome() { return nome; }
-    public String getTipo() { return tipo; }
-    public String getTelefone() { return telefone; }
-    public String getEmail() { return email; }
-    public String getHorarioAtendimento() { return horarioAtendimento; }
-    public Endereco getEndereco() { return endereco; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getHorarioAtendimento() {
+        return horarioAtendimento;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
 }
 

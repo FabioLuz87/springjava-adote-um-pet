@@ -14,5 +14,6 @@ public record RequisicaoEntidade(
         @NotBlank @Email @Size(max = 150) String email,
         @NotBlank @Size(max = 150) String horarioAtendimento,
         @NotNull @Valid DadosEndereco endereco
-) {}
+) {
+}
 
