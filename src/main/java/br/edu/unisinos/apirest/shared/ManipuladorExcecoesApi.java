@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class ApiExceptionHandler {
+public class ManipuladorExcecoesApi {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    ProblemDetail handleNotFound(ResourceNotFoundException exception) {
+    @ExceptionHandler(ExcecaoRecursoNaoEncontrado.class)
+    ProblemDetail handleNotFound(ExcecaoRecursoNaoEncontrado exception) {
         return problem(HttpStatus.NOT_FOUND, "Recurso não encontrado", exception.getMessage());
     }
 
-    @ExceptionHandler(ConflictException.class)
-    ProblemDetail handleConflict(ConflictException exception) {
+    @ExceptionHandler(ExcecaoConflito.class)
+    ProblemDetail handleConflict(ExcecaoConflito exception) {
         return problem(HttpStatus.CONFLICT, "Conflito", exception.getMessage());
     }
 
